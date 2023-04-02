@@ -1,7 +1,14 @@
 package ExpressionCalculator;
 import java.util.Stack;
 
+/**
+ * Класс описывающий калькулятор выражений
+ * */
 public class ExpressionCalculator {
+    /** Функция производящая парсинг и вычисление выражения
+     * @param expression строка содержащая выражение
+     * @return результат вычисления
+     */
     public static double calculateExpression(String expression) throws InvalidExpressionException {
         Stack<Double> values = new Stack<>();
         Stack<Character> operators = new Stack<>();
@@ -38,10 +45,18 @@ public class ExpressionCalculator {
         return values.pop();
     }
 
+    /** Функция проверяющая является ли символ одним из действий(+, -, *, /)
+     * @param ch символ
+     * @return является символ действием или нет
+     */
     private static boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';
     }
 
+    /** Функция определяющая приотитет выполнения действий(+, -, *, /)
+     * @param op1 первое действие
+     * @param op2 второе действие
+     */
     private static boolean hasPrecedence(char op1, char op2) {
         boolean result = true;
         if (op2 == '(' || op2 == ')') {
@@ -53,6 +68,12 @@ public class ExpressionCalculator {
         return result;
     }
 
+    /** Функция вычисляющая результат действия с числами а и b
+     * @param operator первое действие
+     * @param b число
+     * @param a число
+     * @return результат действия
+     */
     private static double applyOperator(char operator, double b, double a) {
         switch (operator) {
             case '+':
